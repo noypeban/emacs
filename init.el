@@ -138,7 +138,6 @@
   :custom
   (modus-themes-italic-constucts . t)
   (modus-themes-bold-constructs . t)
-  (modus-themes-region . t)
   :config
   (load-theme 'modus-vivendi :no-confirm)
   )
@@ -317,24 +316,24 @@
   :url "https://github.com/magnars/multiple-cursors.el"
   :added "2023-02-01"
   :ensure t
-  :config
-  (defhydra hydra-mc (global-map "C-S-c")
-    "multiple-cursors"
-    ("n" 'mc/mark-next-like-this)
-    ("p" 'mc/mark-previous-like-this)
-    ("m" 'mc/mark-more-like-this-extended)
-    ("u" 'mc/unmark-next-like-this)
-    ("U" 'mc/unmark-previous-like-this)
-    ("s" 'mc/skip-to-next-like-this)
-    ("S" 'mc/skip-to-previous-like-this)
-    ("*" 'mc/mark-all-like-this)
-    ("a" 'mc/mark-all-like-this)
-    ("d" 'mc/mark-all-like-this-dwim)
-    ("i" 'mc/insert-numbers)
-    ("l" 'mc/insert-letters)
-    ("o" 'mc/sort-regions)
-    ("O" 'mc/reverse-regions)
-    ))
+  :hydra 
+  (hydra-mc (global-map "C-S-c")
+            "multiple-cursors"
+            ("n" mc/mark-next-like-this)
+            ("p" mc/mark-previous-like-this)
+            ("m" mc/mark-more-like-this-extended)
+            ("u" mc/unmark-next-like-this)
+            ("U" mc/unmark-previous-like-this)
+            ("s" mc/skip-to-next-like-this)
+            ("S" mc/skip-to-previous-like-this)
+            ("*" mc/mark-all-like-this)
+            ("a" mc/mark-all-like-this)
+            ("d" mc/mark-all-like-this-dwim)
+            ("i" mc/insert-numbers)
+            ("l" mc/insert-letters)
+            ("o" mc/sort-regions)
+            ("O" mc/reverse-regions)
+            ))
 
 ;; == neotree buffer bindkeys ==
 ;; n next line, p previous line
@@ -355,13 +354,34 @@
   :url "https://github.com/jaypei/emacs-neotree"
   :added "2022-12-14"
   :ensure t
-  :bind (("<f8>" . neotree-toggle))
+  :bind (("<f3>" . neotree-toggle))
   :custom
   (eo-window-fixed-size . nil)
   :setq
   (neo-smart-open . t)
   ;; (projectile-switch-project-action . 'neotree-projectile-action)
   )
+
+(leaf persp-mode
+  :doc "windows/buffers sets shared among frames + save/load."
+  :req "emacs-24.3"
+  :tag "convenience" "buffers" "windows" "persistence" "workspace" "session" "perspectives" "emacs>=24.3"
+  :url "https://github.com/Bad-ptr/persp-mode.el"
+  :added "2022-12-29"
+  :emacs>= 24.3
+  :ensure t
+  :custom
+  (persp-autokill-buffer-on-remove . 'kill-weak)
+  :config
+  (persp-mode +1)
+  :bind
+  (("C-<tab>" . persp-next)
+   ("C-<iso-lefttab>" . persp-prev)
+   ;; ("<kanji> k" . (lambda ()
+   ;;                  (interactive)
+   ;;                  (message "Kill buffer.")
+   ;;                  (persp-kill-buffer)))
+   ))
 
 (leaf ace-jump-mode
   :doc "a quick cursor location minor mode for emacs"
