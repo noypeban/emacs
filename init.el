@@ -307,7 +307,36 @@
   (prog-mode-hook . turn-on-smartparens-mode)
   :config
   (show-smartparens-global-mode t)
-  (sp-use-smartparens-bindings))
+  :bind
+  (
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)
+   ("C-<up>" . sp-up-sexp)
+   ("C-<down>" . sp-down-sexp)
+   ("M-<up>" . sp-backward-up-sexp)
+   ("M-<down>" . sp-backward-down-sexp)
+   ("C-M-a" . sp-beginning-of-sexp)
+   ("C-M-e" . sp-end-of-sexp)
+   ("C-M-n" . sp-next-sexp)
+   ("C-M-p" . sp-previous-sexp)
+   ("C-M-k" . sp-kill-sexp)
+   ("C-M-w" . sp-copy-sexp)
+   ("M-<delete>" . sp-unwrap-sexp)
+   ("M-<backspace>" . sp-backward-unwrap-sexp)
+   ("C-<right>" . sp-forward-slurp-sexp)
+   ("C-<left>" . sp-forward-barf-sexp)
+   ("C-M-<left>" . sp-backward-slurp-sexp)
+   ("C-M-<right>" . sp-backward-barf-sexp)
+   ("M-D" . sp-splice-sexp)
+   ("C-M-<delete>" . sp-splice-sexp-killing-forward)
+   ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
+   ("C-S-<backspace>" . sp-splice-sexp-killing-around)
+   ("C-]" . sp-select-next-thing-exchange)
+   ("C-M-]" . sp-select-next-thing)
+   ("C-M-SPC" . sp-mark-sexp)
+   ("M-F" . sp-forward-symbol)
+   ("M-B" . sp-backward-symbol)
+   ))
 
 (leaf multiple-cursors
   :doc "Multiple cursors for Emacs."
