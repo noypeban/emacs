@@ -64,7 +64,7 @@
            ;; (tab-bar-mode . 1)
            ;; (tab-bar-new-tab-choice . "*scratch*")
            
-           (select-enable-primary . nil)
+           (select-enable-primary . t)
            ;; (select-enable-clipboard . t)
            
            ;; Exclude ".lib" from completion-ignored-extensions
@@ -309,24 +309,36 @@
   (show-smartparens-global-mode t)
   :bind
   (
+   ;; S式単位移動
    ("C-M-f" . sp-forward-sexp)
    ("C-M-b" . sp-backward-sexp)
-   ("C-<up>" . sp-up-sexp)
-   ("C-<down>" . sp-down-sexp)
-   ("M-<up>" . sp-backward-up-sexp)
-   ("M-<down>" . sp-backward-down-sexp)
-   ("C-M-a" . sp-beginning-of-sexp)
-   ("C-M-e" . sp-end-of-sexp)
    ("C-M-n" . sp-next-sexp)
    ("C-M-p" . sp-previous-sexp)
+   ;; シンボル単位移動
+   ("M-F" . sp-forward-symbol)
+   ("M-B" . sp-backward-symbol)
+   ;; 子のS式の関数名に移動
+   ("C-<down>" . sp-down-sexp)
+   ;; 閉括弧を出ながらS式を上る
+   ("C-<up>" . sp-up-sexp)
+   ;; backward-up-list C-M-uと同じ？
+   ("M-<up>" . sp-backward-up-sexp)
+   ;; 閉括弧の中に入りながらS式を降りる
+   ("M-<down>" . sp-backward-down-sexp)
+   ;; S式内移動
+   ("C-M-a" . sp-beginning-of-sexp)
+   ("C-M-e" . sp-end-of-sexp)
+   ;; カット
    ("C-M-k" . sp-kill-sexp)
    ("C-M-w" . sp-copy-sexp)
+   ;; 括弧外し
    ("M-<delete>" . sp-unwrap-sexp)
    ("M-<backspace>" . sp-backward-unwrap-sexp)
    ("C-<right>" . sp-forward-slurp-sexp)
    ("C-<left>" . sp-forward-barf-sexp)
    ("C-M-<left>" . sp-backward-slurp-sexp)
    ("C-M-<right>" . sp-backward-barf-sexp)
+   ;; other
    ("M-D" . sp-splice-sexp)
    ("C-M-<delete>" . sp-splice-sexp-killing-forward)
    ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
@@ -334,8 +346,6 @@
    ("C-]" . sp-select-next-thing-exchange)
    ("C-M-]" . sp-select-next-thing)
    ("C-M-SPC" . sp-mark-sexp)
-   ("M-F" . sp-forward-symbol)
-   ("M-B" . sp-backward-symbol)
    ))
 
 (leaf multiple-cursors
