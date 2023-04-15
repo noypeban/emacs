@@ -43,6 +43,10 @@
            (scroll-bar-mode . nil)
 	       (frame-resize-pixelwise . t)
            (enable-recursive-minibuffers . t)
+           ;; startup
+           (inhibit-startup-screen . t)
+           (inhibit-startup-message . t)
+           (inhibit-startup-echo-area-message . t)
            ;; tab
 	       (indent-tabs-mode . nil)
            (tab-width . 4)
@@ -104,6 +108,15 @@
                           (let ((path (file-truename buffer-file-name)))
                             (kill-new path)
                             (message "Yank `%s'." path))))))
+
+(leaf which-key
+  :doc "Display available keybindings in popup"
+  :req "emacs-24.4"
+  :tag "emacs>=24.4"
+  :url "https://github.com/justbur/emacs-which-key"
+  :added "2023-04-15"
+  :emacs>= 24.4
+  :ensure t)
 
 (leaf iflipb
   :doc "Interactively flip between recently visited buffers"
@@ -209,6 +222,7 @@
 ;; c->c コミット->C-c C-c
 ;; P->u push origin/master
 ;; F->u プル
+;; b->b チェックアウト
 (leaf magit
   :doc "A Git porcelain inside Emacs."
   :req "emacs-25.1" "compat-28.1.1.2" "dash-20210826" "git-commit-20221127" "magit-section-20221127" "transient-20220325" "with-editor-20220318"
