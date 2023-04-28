@@ -182,7 +182,9 @@
   :tag "builtin"
   :custom `((auto-save-timeout . 3)
             (auto-save-interval . 60)
-            (auto-save-file-name-transforms . '((".*" ,(locate-user-emacs-file "backup/") t)))
+            (auto-save-file-name-transforms . 
+                                            (cons `(,(car (car auto-save-file-name-transforms)) 
+                                                   ,(concat BACKDIR "\\2") t) auto-save-file-name-transforms))
             (backup-directory-alist . '((".*" . ,(locate-user-emacs-file "backup"))
                                         (,tramp-file-name-regexp . nil)))
 	        (auto-save-visited-mode . t)
@@ -474,6 +476,16 @@
   :ensure t
   :custom
   (markdown-fontify-code-blocks-natively . t))
+
+(leaf nix-mode
+  :doc "Major mode for editing .nix files"
+  :req "emacs-25.1" "magit-section-0" "transient-0.3"
+  :tag "unix" "tools" "languages" "nix" "emacs>=25.1"
+  :url "https://github.com/NixOS/nix-mode"
+  :added "2023-04-28"
+  :emacs>= 25.1
+  :ensure t
+  :after magit-section)
 
 (leaf ein
   :doc "Emacs IPython Notebook"
